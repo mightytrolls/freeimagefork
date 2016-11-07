@@ -121,35 +121,42 @@ FreeImage_ConvertLine32To24(BYTE *target, BYTE *source, int width_in_pixels) {
 
 FIBITMAP * DLL_CALLCONV
 FreeImage_ConvertTo24Bits(FIBITMAP *dib) {
-	if(!FreeImage_HasPixels(dib)) return NULL;
+	if(!dib) return NULL;
 
 	const unsigned bpp = FreeImage_GetBPP(dib);
-	const FREE_IMAGE_TYPE image_type = FreeImage_GetImageType(dib);
 
-	if((image_type != FIT_BITMAP) && (image_type != FIT_RGB16) && (image_type != FIT_RGBA16)) {
+	const FREE_IMAGE_TYPE image_type = FreeImage_GetImageType(dib);
+	if((image_type != FIT_BITMAP) && (image_type != FIT_RGB16) && (image_type != FIT_RGBA16) && (image_type != FIT_RGBF) && (image_type != FIT_RGBAF)) {
 		return NULL;
 	}
-	
-	const int width = FreeImage_GetWidth(dib);
-	const int height = FreeImage_GetHeight(dib);
+
+	if(bpp == 24) {
+		return FreeImage_Clone(dib);
+	}
+
+
+	const unsigned width = FreeImage_GetWidth(dib);
+	const unsigned height = FreeImage_GetHeight(dib);
+	FIBITMAP *new_dib = FreeImage_Allocate(width, height, 24, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK);
+
+	if(new_dib == NULL) {
+		return NULL;
+	}
+
+	const unsigned src_pitch = FreeImage_GetPitch(dib);
+	const unsigned dst_pitch = FreeImage_GetPitch(new_dib);
+	const BYTE *src_bits = FreeImage_GetBits(dib);
+	BYTE *dst_bits = FreeImage_GetBits(new_dib);
+
+	// copy metadata from src to dst
+	FreeImage_CloneMetadata(new_dib, dib);
 
 	if(image_type == FIT_BITMAP) {
-		if(bpp == 24) {
-			return FreeImage_Clone(dib);
-		}
-
-		FIBITMAP *new_dib = FreeImage_Allocate(width, height, 24, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK);
-		if(new_dib == NULL) {
-			return NULL;
-		}
-
-		// copy metadata from src to dst
-		FreeImage_CloneMetadata(new_dib, dib);
 
 		switch(bpp) {
 			case 1 :
 			{
-				for (int rows = 0; rows < height; rows++) {
+				for (unsigned rows = 0; rows < height; rows++) {
 					FreeImage_ConvertLine1To24(FreeImage_GetScanLine(new_dib, rows), FreeImage_GetScanLine(dib, rows), width, FreeImage_GetPalette(dib));					
 				}
 				return new_dib;
@@ -157,7 +164,7 @@ FreeImage_ConvertTo24Bits(FIBITMAP *dib) {
 
 			case 4 :
 			{
-				for (int rows = 0; rows < height; rows++) {
+				for (unsigned rows = 0; rows < height; rows++) {
 					FreeImage_ConvertLine4To24(FreeImage_GetScanLine(new_dib, rows), FreeImage_GetScanLine(dib, rows), width, FreeImage_GetPalette(dib));
 				}
 				return new_dib;
@@ -165,7 +172,7 @@ FreeImage_ConvertTo24Bits(FIBITMAP *dib) {
 				
 			case 8 :
 			{
-				for (int rows = 0; rows < height; rows++) {
+				for (unsigned rows = 0; rows < height; rows++) {
 					FreeImage_ConvertLine8To24(FreeImage_GetScanLine(new_dib, rows), FreeImage_GetScanLine(dib, rows), width, FreeImage_GetPalette(dib));
 				}
 				return new_dib;
@@ -173,7 +180,7 @@ FreeImage_ConvertTo24Bits(FIBITMAP *dib) {
 
 			case 16 :
 			{
-				for (int rows = 0; rows < height; rows++) {
+				for (unsigned rows = 0; rows < height; rows++) {
 					if ((FreeImage_GetRedMask(dib) == FI16_565_RED_MASK) && (FreeImage_GetGreenMask(dib) == FI16_565_GREEN_MASK) && (FreeImage_GetBlueMask(dib) == FI16_565_BLUE_MASK)) {
 						FreeImage_ConvertLine16To24_565(FreeImage_GetScanLine(new_dib, rows), FreeImage_GetScanLine(dib, rows), width);
 					} else {
@@ -186,67 +193,113 @@ FreeImage_ConvertTo24Bits(FIBITMAP *dib) {
 
 			case 32 :
 			{
-				for (int rows = 0; rows < height; rows++) {
+				for (unsigned rows = 0; rows < height; rows++) {
 					FreeImage_ConvertLine32To24(FreeImage_GetScanLine(new_dib, rows), FreeImage_GetScanLine(dib, rows), width);
 				}
 				return new_dib;
 			}
 		}
-	
-	} else if(image_type == FIT_RGB16) {
-		FIBITMAP *new_dib = FreeImage_Allocate(width, height, 24, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK);
-		if(new_dib == NULL) {
-			return NULL;
-		}
-
-		// copy metadata from src to dst
-		FreeImage_CloneMetadata(new_dib, dib);
-
-		const unsigned src_pitch = FreeImage_GetPitch(dib);
-		const unsigned dst_pitch = FreeImage_GetPitch(new_dib);
-		const BYTE *src_bits = FreeImage_GetBits(dib);
-		BYTE *dst_bits = FreeImage_GetBits(new_dib);
-		for (int rows = 0; rows < height; rows++) {
-			const FIRGB16 *src_pixel = (FIRGB16*)src_bits;
-			RGBTRIPLE *dst_pixel = (RGBTRIPLE*)dst_bits;
-			for(int cols = 0; cols < width; cols++) {
-				dst_pixel[cols].rgbtRed   = (BYTE)(src_pixel[cols].red   >> 8);
-				dst_pixel[cols].rgbtGreen = (BYTE)(src_pixel[cols].green >> 8);
-				dst_pixel[cols].rgbtBlue  = (BYTE)(src_pixel[cols].blue  >> 8);
-			}
-			src_bits += src_pitch;
-			dst_bits += dst_pitch;
-		}
-
-		return new_dib;
-
-	} else if(image_type == FIT_RGBA16) {
-		FIBITMAP *new_dib = FreeImage_Allocate(width, height, 24, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK);
-		if(new_dib == NULL) {
-			return NULL;
-		}
-
-		// copy metadata from src to dst
-		FreeImage_CloneMetadata(new_dib, dib);
-
-		const unsigned src_pitch = FreeImage_GetPitch(dib);
-		const unsigned dst_pitch = FreeImage_GetPitch(new_dib);
-		const BYTE *src_bits = FreeImage_GetBits(dib);
-		BYTE *dst_bits = FreeImage_GetBits(new_dib);
-		for (int rows = 0; rows < height; rows++) {
-			const FIRGBA16 *src_pixel = (FIRGBA16*)src_bits;
-			RGBTRIPLE *dst_pixel = (RGBTRIPLE*)dst_bits;
-			for(int cols = 0; cols < width; cols++) {
-				dst_pixel[cols].rgbtRed   = (BYTE)(src_pixel[cols].red   >> 8);
-				dst_pixel[cols].rgbtGreen = (BYTE)(src_pixel[cols].green >> 8);
-				dst_pixel[cols].rgbtBlue  = (BYTE)(src_pixel[cols].blue  >> 8);
-			}
-			src_bits += src_pitch;
-			dst_bits += dst_pitch;
-		}		
+	}
+	else
+		if(image_type == FIT_RGB16) {
+			for (unsigned rows = 0; rows < height; rows++) {
+				const FIRGB16 *src_pixel = (FIRGB16*)src_bits;
+				RGBTRIPLE *dst_pixel = (RGBTRIPLE*)dst_bits;
+				for(unsigned cols = 0; cols < width; cols++) {
+					dst_pixel[cols].rgbtRed		= (BYTE)(src_pixel[cols].red   >> 8);
+					dst_pixel[cols].rgbtGreen	= (BYTE)(src_pixel[cols].green >> 8);
+					dst_pixel[cols].rgbtBlue		= (BYTE)(src_pixel[cols].blue  >> 8);										
+				}
+				src_bits += src_pitch;
+				dst_bits += dst_pitch;
+			}		
 
 		return new_dib;
 	}
+	else
+		if(image_type == FIT_RGBA16) {
+			for (unsigned rows = 0; rows < height; rows++) {
+				const FIRGBA16 *src_pixel = (FIRGBA16*)src_bits;
+				RGBTRIPLE *dst_pixel = (RGBTRIPLE*)dst_bits;
+				for(unsigned cols = 0; cols < width; cols++) {
+					dst_pixel[cols].rgbtRed		= (BYTE)(src_pixel[cols].red   >> 8);
+					dst_pixel[cols].rgbtGreen	= (BYTE)(src_pixel[cols].green >> 8);
+					dst_pixel[cols].rgbtBlue		= (BYTE)(src_pixel[cols].blue  >> 8);										
+				}
+				src_bits += src_pitch;
+				dst_bits += dst_pitch;
+			}		
 
+		return new_dib;
+	}
+	else
+		if(image_type == FIT_RGBF) {
+			// Convert to 24 bits from RGBF and adjust gamma
+			float slope = 4.5F;
+			float start = 0.018F;
+		//	gammaval = 2.2;
+			
+			const float fgamma = 0.409090;
+
+			for(unsigned y = 0; y < height; y++) {
+				const FIRGBF *src_pixel = (FIRGBF*)src_bits;
+
+				BYTE *dst_pixel = (BYTE*)dst_bits;
+				for(unsigned x = 0; x < width; x++) {
+					const float red   = (src_pixel[x].red > 1)   ? 1 : src_pixel[x].red;
+					const float green = (src_pixel[x].green > 1) ? 1 : src_pixel[x].green;
+					const float blue  = (src_pixel[x].blue > 1)  ? 1 : src_pixel[x].blue;
+					
+					// each channel has float values in the interval [0-1]
+					//dst_pixel[FI_RGBA_RED]   = (BYTE)(255 * red   + 0.5);
+					dst_pixel[FI_RGBA_RED] = (BYTE)((red <= start) ? red * slope : (float)(1.099 * pow(red, fgamma) - 0.099) * 255 + 0.5);
+					//dst_pixel[FI_RGBA_GREEN] = (BYTE)(255 * green + 0.5);
+					dst_pixel[FI_RGBA_GREEN] = (BYTE)((green <= start) ? green * slope : (float)(1.099 * pow(green, fgamma) - 0.099) * 255 + 0.5);
+					//dst_pixel[FI_RGBA_BLUE]  = (BYTE)(255 * blue  + 0.5);
+					dst_pixel[FI_RGBA_BLUE] = (BYTE)((blue <= start) ? blue * slope : (float)(1.099 * pow(blue, fgamma) - 0.099) * 255 + 0.5);
+
+					dst_pixel += 3;
+				}
+				src_bits += src_pitch;
+				dst_bits += dst_pitch;
+			}
+
+	 return new_dib;
+	}
+	else
+		if(image_type == FIT_RGBAF) {
+			// Convert to 24 bits from RGBAF and adjust gamma
+			float slope = 4.5F;
+			float start = 0.018F;
+		//	gammaval = 2.2;
+			
+			const float fgamma = 0.409090;
+
+			for(unsigned y = 0; y < height; y++) {
+				const FIRGBAF *src_pixel = (FIRGBAF*)src_bits;
+
+				BYTE *dst_pixel = (BYTE*)dst_bits;
+				for(unsigned x = 0; x < width; x++) {
+					const float red   = (src_pixel[x].red > 1)   ? 1 : src_pixel[x].red;
+					const float green = (src_pixel[x].green > 1) ? 1 : src_pixel[x].green;
+					const float blue  = (src_pixel[x].blue > 1)  ? 1 : src_pixel[x].blue;
+					
+					// each channel has float values in the interval [0-1]
+					//dst_pixel[FI_RGBA_RED]   = (BYTE)(255 * red   + 0.5);
+					dst_pixel[FI_RGBA_RED] = (BYTE)((red <= start) ? red * slope : (float)(1.099 * pow(red, fgamma) - 0.099) * 255 + 0.5);
+					//dst_pixel[FI_RGBA_GREEN] = (BYTE)(255 * green + 0.5);
+					dst_pixel[FI_RGBA_GREEN] = (BYTE)((green <= start) ? green * slope : (float)(1.099 * pow(green, fgamma) - 0.099) * 255 + 0.5);
+					//dst_pixel[FI_RGBA_BLUE]  = (BYTE)(255 * blue  + 0.5);
+					dst_pixel[FI_RGBA_BLUE] = (BYTE)((blue <= start) ? blue * slope : (float)(1.099 * pow(blue, fgamma) - 0.099) * 255 + 0.5);
+
+					dst_pixel += 3;
+				}
+				src_bits += src_pitch;
+				dst_bits += dst_pitch;
+			}
+
+	 return new_dib;
+	}
+	
 	return NULL;
 }

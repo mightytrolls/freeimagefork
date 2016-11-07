@@ -186,33 +186,39 @@ FreeImage_ConvertLine8To32MapTransparency(BYTE *target, BYTE *source, int width_
 
 FIBITMAP * DLL_CALLCONV
 FreeImage_ConvertTo32Bits(FIBITMAP *dib) {
-	if(!FreeImage_HasPixels(dib)) return NULL;
+	if(!dib) return NULL;
 
 	const int bpp = FreeImage_GetBPP(dib);
 	const FREE_IMAGE_TYPE image_type = FreeImage_GetImageType(dib);
 	
-	if((image_type != FIT_BITMAP) && (image_type != FIT_RGB16) && (image_type != FIT_RGBA16)) {
+	if((image_type != FIT_BITMAP) && (image_type != FIT_RGB16) && (image_type != FIT_RGBA16) && (image_type != FIT_RGBF) && (image_type != FIT_RGBAF)) {
 		return NULL;
 	}
 	
-	const int width = FreeImage_GetWidth(dib);
-	const int height = FreeImage_GetHeight(dib);
+	if(bpp == 32) {
+		return FreeImage_Clone(dib);
+	}
+
+	const unsigned width = FreeImage_GetWidth(dib);
+	const unsigned height = FreeImage_GetHeight(dib);
+
+	FIBITMAP *new_dib = FreeImage_Allocate(width, height, 32, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK);
+	if(new_dib == NULL) {
+		return NULL;
+	}
+
+	const unsigned src_pitch = FreeImage_GetPitch(dib);
+	const unsigned dst_pitch = FreeImage_GetPitch(new_dib);
+	const BYTE *src_bits = FreeImage_GetBits(dib);
+	BYTE *dst_bits = FreeImage_GetBits(new_dib);
+
+
+	// copy metadata from src to dst
+	FreeImage_CloneMetadata(new_dib, dib);
+
+	BOOL bIsTransparent = FreeImage_IsTransparent(dib);	
 
 	if(image_type == FIT_BITMAP) {
-
-		if(bpp == 32) {
-			return FreeImage_Clone(dib);
-		}
-
-		FIBITMAP *new_dib = FreeImage_Allocate(width, height, 32, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK);
-		if(new_dib == NULL) {
-			return NULL;
-		}
-
-		// copy metadata from src to dst
-		FreeImage_CloneMetadata(new_dib, dib);
-
-		BOOL bIsTransparent = FreeImage_IsTransparent(dib);
 
 		switch(bpp) {
 			case 1:
@@ -285,18 +291,7 @@ FreeImage_ConvertTo32Bits(FIBITMAP *dib) {
 		}
 
 	} else if(image_type == FIT_RGB16) {
-		FIBITMAP *new_dib = FreeImage_Allocate(width, height, 32, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK);
-		if(new_dib == NULL) {
-			return NULL;
-		}
-
-		// copy metadata from src to dst
-		FreeImage_CloneMetadata(new_dib, dib);
-
-		const unsigned src_pitch = FreeImage_GetPitch(dib);
-		const unsigned dst_pitch = FreeImage_GetPitch(new_dib);
-		const BYTE *src_bits = FreeImage_GetBits(dib);
-		BYTE *dst_bits = FreeImage_GetBits(new_dib);
+		
 		for (int rows = 0; rows < height; rows++) {
 			const FIRGB16 *src_pixel = (FIRGB16*)src_bits;
 			RGBQUAD *dst_pixel = (RGBQUAD*)dst_bits;
@@ -313,18 +308,6 @@ FreeImage_ConvertTo32Bits(FIBITMAP *dib) {
 		return new_dib;
 
 	} else if(image_type == FIT_RGBA16) {
-		FIBITMAP *new_dib = FreeImage_Allocate(width, height, 32, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK);
-		if(new_dib == NULL) {
-			return NULL;
-		}
-
-		// copy metadata from src to dst
-		FreeImage_CloneMetadata(new_dib, dib);
-
-		const unsigned src_pitch = FreeImage_GetPitch(dib);
-		const unsigned dst_pitch = FreeImage_GetPitch(new_dib);
-		const BYTE *src_bits = FreeImage_GetBits(dib);
-		BYTE *dst_bits = FreeImage_GetBits(new_dib);
 		for (int rows = 0; rows < height; rows++) {
 			const FIRGBA16 *src_pixel = (FIRGBA16*)src_bits;
 			RGBQUAD *dst_pixel = (RGBQUAD*)dst_bits;
@@ -340,6 +323,79 @@ FreeImage_ConvertTo32Bits(FIBITMAP *dib) {
 
 		return new_dib;
 	}
+	else
+		if(image_type == FIT_RGBF) {	
+			// Convert to 32 bits from RGBAF and adjust gamma
+			
+			float slope = 4.5F;
+			float start = 0.018F;
+		//	gammaval = 2.2;			
+			const float fgamma = 0.409090;
+
+			for(int y = 0; y < height; y++) {
+				const FIRGBF *src_pixel = (FIRGBF*)src_bits;
+				BYTE *dst_pixel = (BYTE*)dst_bits;
+				for(int x = 0; x < width; x++) {
+					const float red   = (src_pixel[x].red > 1)   ? 1 : src_pixel[x].red;
+					const float green = (src_pixel[x].green > 1) ? 1 : src_pixel[x].green;
+					const float blue  = (src_pixel[x].blue > 1)  ? 1 : src_pixel[x].blue;					
+					
+					// each channel has float values in the interval [0-1]
+
+					//dst_pixel[FI_RGBA_RED]   = (BYTE)(255 * red   + 0.5);
+					dst_pixel[FI_RGBA_RED] = (BYTE)((red <= start) ? red * slope : (float)(1.099 * pow(red, fgamma) - 0.099) * 255 + 0.5);
+					//dst_pixel[FI_RGBA_GREEN] = (BYTE)(255 * green + 0.5);
+					dst_pixel[FI_RGBA_GREEN] = (BYTE)((green <= start) ? green * slope : (float)(1.099 * pow(green, fgamma) - 0.099) * 255 + 0.5);
+					//dst_pixel[FI_RGBA_BLUE]  = (BYTE)(255 * blue  + 0.5);
+					dst_pixel[FI_RGBA_BLUE] = (BYTE)((blue <= start) ? blue * slope : (float)(1.099 * pow(blue, fgamma) - 0.099) * 255 + 0.5);
+
+					dst_pixel[FI_RGBA_ALPHA]  = 0;
+
+					dst_pixel += 4;
+				}
+				src_bits += src_pitch;
+				dst_bits += dst_pitch;
+			}
+
+		 return new_dib;
+		}
+	else
+		if(image_type == FIT_RGBAF) {	
+			// Convert to 32 bits from RGBAF and adjust gamma
+			
+			float slope = 4.5F;
+			float start = 0.018F;
+		//	gammaval = 2.2;			
+			const float fgamma = 0.409090;
+
+			for(int y = 0; y < height; y++) {
+				const FIRGBAF *src_pixel = (FIRGBAF*)src_bits;
+				BYTE *dst_pixel = (BYTE*)dst_bits;
+				for(int x = 0; x < width; x++) {
+					const float red   = (src_pixel[x].red > 1)   ? 1 : src_pixel[x].red;
+					const float green = (src_pixel[x].green > 1) ? 1 : src_pixel[x].green;
+					const float blue  = (src_pixel[x].blue > 1)  ? 1 : src_pixel[x].blue;
+					const float alpha  = (src_pixel[x].alpha > 1)  ? 1 : src_pixel[x].alpha;
+					
+					// each channel has float values in the interval [0-1]
+
+					//dst_pixel[FI_RGBA_RED]   = (BYTE)(255 * red   + 0.5);
+					dst_pixel[FI_RGBA_RED] = (BYTE)((red <= start) ? red * slope : (float)(1.099 * pow(red, fgamma) - 0.099) * 255 + 0.5);
+					//dst_pixel[FI_RGBA_GREEN] = (BYTE)(255 * green + 0.5);
+					dst_pixel[FI_RGBA_GREEN] = (BYTE)((green <= start) ? green * slope : (float)(1.099 * pow(green, fgamma) - 0.099) * 255 + 0.5);
+					//dst_pixel[FI_RGBA_BLUE]  = (BYTE)(255 * blue  + 0.5);
+					dst_pixel[FI_RGBA_BLUE] = (BYTE)((blue <= start) ? blue * slope : (float)(1.099 * pow(blue, fgamma) - 0.099) * 255 + 0.5);
+
+					dst_pixel[FI_RGBA_ALPHA]  = (BYTE)(255 * alpha  + 0.5);
+
+					dst_pixel += 4;
+				}
+				src_bits += src_pitch;
+				dst_bits += dst_pitch;
+			}
+
+		 return new_dib;
+		}
 	
 	return NULL;
 }

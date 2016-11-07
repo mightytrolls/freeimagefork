@@ -1,0 +1,264 @@
+﻿Build started 28.07.2015 22:16:27.
+     1>Project "D:\include\FreeImage_src\FreeImage.2013.vcxproj" on node 6 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ISource /ISource\ZLib /ISource\DeprecationManager /ISource\OpenEXR /ISource\OpenEXR\Half /ISource\OpenEXR\Iex /ISource\OpenEXR\IlmImf /ISource\OpenEXR\Imath /ISource\OpenEXR\IlmThread /ISource\LibJXR\jxrgluelib /ISource\LibJXR\image\sys /nologo /W3 /WX- /O2 /Ob1 /Oi /Ot /Oy /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D OPJ_STATIC /D FREEIMAGE_EXPORTS /D _CRT_SECURE_NO_DEPRECATE /D LIBRAW_NODLL /D _VC80_UPGRADE=0x0710 /D _WINDLL /D _MBCS /GF /Gm- /EHsc /MT /Zp16 /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo".\Win32\Release\\" /Fd".\Win32\Release\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Source\FreeImage\BitmapAccess.cpp Source\FreeImage\ColorLookup.cpp Source\FreeImage\ConversionRGBA16.cpp Source\FreeImage\ConversionRGBAF.cpp Source\FreeImage\FreeImage.cpp Source\FreeImage\FreeImageIO.cpp Source\FreeImage\GetType.cpp Source\FreeImage\LFPQuantizer.cpp Source\FreeImage\MemoryIO.cpp Source\FreeImage\PixelAccess.cpp Source\FreeImage\J2KHelper.cpp Source\FreeImage\MNGHelper.cpp Source\FreeImage\Plugin.cpp Source\FreeImage\PluginBMP.cpp Source\FreeImage\PluginCUT.cpp Source\FreeImage\PluginDDS.cpp Source\FreeImage\PluginEXR.cpp Source\FreeImage\PluginG3.cpp Source\FreeImage\PluginGIF.cpp Source\FreeImage\PluginHDR.cpp Source\FreeImage\PluginICO.cpp Source\FreeImage\PluginIFF.cpp Source\FreeImage\PluginJ2K.cpp Source\FreeImage\PluginJNG.cpp Source\FreeImage\PluginJP2.cpp Source\FreeImage\PluginJPEG.cpp Source\FreeImage\PluginJXR.cpp Source\FreeImage\PluginKOALA.cpp Source\FreeImage\PluginMNG.cpp Source\FreeImage\PluginPCD.cpp Source\FreeImage\PluginPCX.cpp Source\FreeImage\PluginPFM.cpp Source\FreeImage\PluginPICT.cpp Source\FreeImage\PluginPNG.cpp Source\FreeImage\PluginPNM.cpp Source\FreeImage\PluginPSD.cpp Source\FreeImage\PluginRAS.cpp Source\FreeImage\PluginRAW.cpp Source\FreeImage\PluginSGI.cpp Source\FreeImage\PluginTARGA.cpp Source\FreeImage\PluginTIFF.cpp Source\FreeImage\PluginWBMP.cpp Source\FreeImage\PluginWebP.cpp Source\FreeImage\PluginXBM.cpp Source\FreeImage\PluginXPM.cpp Source\FreeImage\PSDParser.cpp Source\FreeImage\TIFFLogLuv.cpp Source\FreeImage\Conversion.cpp Source\FreeImage\Conversion16_555.cpp Source\FreeImage\Conversion16_565.cpp Source\FreeImage\Conversion24.cpp Source\FreeImage\Conversion32.cpp Source\FreeImage\Conversion4.cpp Source\FreeImage\Conversion8.cpp Source\FreeImage\ConversionFloat.cpp Source\FreeImage\ConversionRGB16.cpp Source\FreeImage\ConversionRGBF.cpp Source\FreeImage\ConversionType.cpp Source\FreeImage\ConversionUINT16.cpp Source\FreeImage\Halftoning.cpp Source\FreeImage\tmoColorConvert.cpp Source\FreeImage\tmoDrago03.cpp Source\FreeImage\tmoFattal02.cpp Source\FreeImage\tmoReinhard05.cpp Source\FreeImage\ToneMapping.cpp Source\FreeImage\NNQuantizer.cpp Source\FreeImage\WuQuantizer.cpp Source\DeprecationManager\Deprecated.cpp Source\DeprecationManager\DeprecationMgr.cpp Source\FreeImage\CacheFile.cpp Source\FreeImage\MultiPage.cpp Source\FreeImage\ZLibInterface.cpp Source\Metadata\Exif.cpp Source\Metadata\FIRational.cpp Source\Metadata\FreeImageTag.cpp Source\Metadata\IPTC.cpp Source\Metadata\TagConversion.cpp Source\Metadata\TagLib.cpp Source\Metadata\XTIFF.cpp Source\FreeImageToolkit\Background.cpp Source\FreeImageToolkit\BSplineRotate.cpp Source\FreeImageToolkit\Channels.cpp Source\FreeImageToolkit\ClassicRotate.cpp Source\FreeImageToolkit\Colors.cpp Source\FreeImageToolkit\CopyPaste.cpp Source\FreeImageToolkit\Display.cpp Source\FreeImageToolkit\Flip.cpp Source\FreeImageToolkit\JPEGTransform.cpp Source\FreeImageToolkit\MultigridPoissonSolver.cpp Source\FreeImageToolkit\Rescale.cpp Source\FreeImageToolkit\Resize.cpp
+         BitmapAccess.cpp
+         ColorLookup.cpp
+         ConversionRGBA16.cpp
+         ConversionRGBAF.cpp
+         FreeImage.cpp
+         FreeImageIO.cpp
+         GetType.cpp
+         LFPQuantizer.cpp
+         MemoryIO.cpp
+         PixelAccess.cpp
+         J2KHelper.cpp
+         MNGHelper.cpp
+         Plugin.cpp
+         PluginBMP.cpp
+         PluginCUT.cpp
+         PluginDDS.cpp
+         PluginEXR.cpp
+         PluginG3.cpp
+         PluginGIF.cpp
+         PluginHDR.cpp
+         Compiling...
+         PluginICO.cpp
+         PluginIFF.cpp
+         PluginJ2K.cpp
+         PluginJNG.cpp
+         PluginJP2.cpp
+         PluginJPEG.cpp
+         PluginJXR.cpp
+         PluginKOALA.cpp
+         PluginMNG.cpp
+         PluginPCD.cpp
+         PluginPCX.cpp
+         PluginPFM.cpp
+         PluginPICT.cpp
+         PluginPNG.cpp
+         PluginPNM.cpp
+         PluginPSD.cpp
+         PluginRAS.cpp
+         PluginRAW.cpp
+         PluginSGI.cpp
+         PluginTARGA.cpp
+         Compiling...
+         PluginTIFF.cpp
+         PluginWBMP.cpp
+         PluginWebP.cpp
+         PluginXBM.cpp
+         PluginXPM.cpp
+         PSDParser.cpp
+         TIFFLogLuv.cpp
+         Conversion.cpp
+         Conversion16_555.cpp
+         Conversion16_565.cpp
+         Conversion24.cpp
+     1>Source\FreeImage\Conversion24.cpp(242): warning C4305: 'initializing': truncation from 'double' to 'float'
+     1>Source\FreeImage\Conversion24.cpp(276): warning C4305: 'initializing': truncation from 'double' to 'float'
+         Conversion32.cpp
+     1>Source\FreeImage\Conversion32.cpp(227): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(231): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(242): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(246): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(257): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(261): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(271): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(285): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(295): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(298): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(311): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(314): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(333): warning C4305: 'initializing': truncation from 'double' to 'float'
+     1>Source\FreeImage\Conversion32.cpp(335): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(338): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(369): warning C4305: 'initializing': truncation from 'double' to 'float'
+     1>Source\FreeImage\Conversion32.cpp(371): warning C4018: '<': signed/unsigned mismatch
+     1>Source\FreeImage\Conversion32.cpp(374): warning C4018: '<': signed/unsigned mismatch
+         Conversion4.cpp
+         Conversion8.cpp
+         ConversionFloat.cpp
+         ConversionRGB16.cpp
+         ConversionRGBF.cpp
+         ConversionType.cpp
+         ConversionUINT16.cpp
+         Halftoning.cpp
+         Compiling...
+         tmoColorConvert.cpp
+         tmoDrago03.cpp
+         tmoFattal02.cpp
+         tmoReinhard05.cpp
+         ToneMapping.cpp
+         NNQuantizer.cpp
+         WuQuantizer.cpp
+         Deprecated.cpp
+         DeprecationMgr.cpp
+         CacheFile.cpp
+         MultiPage.cpp
+         ZLibInterface.cpp
+         Exif.cpp
+         FIRational.cpp
+         FreeImageTag.cpp
+         IPTC.cpp
+         TagConversion.cpp
+     1>Source\Metadata\TagConversion.cpp(202): warning C4477: 'sprintf' : format string '%ld' requires an argument of type 'long', but variadic argument 1 has type 'UINT64'
+         Source\Metadata\TagConversion.cpp(202): note: consider using '%lld' in the format string
+         Source\Metadata\TagConversion.cpp(202): note: consider using '%I64d' in the format string
+     1>Source\Metadata\TagConversion.cpp(205): warning C4477: 'sprintf' : format string '%ld' requires an argument of type 'long', but variadic argument 1 has type 'UINT64'
+         Source\Metadata\TagConversion.cpp(205): note: consider using '%lld' in the format string
+         Source\Metadata\TagConversion.cpp(205): note: consider using '%I64d' in the format string
+     1>Source\Metadata\TagConversion.cpp(215): warning C4477: 'sprintf' : format string '%X' requires an argument of type 'unsigned int', but variadic argument 1 has type 'UINT64'
+         Source\Metadata\TagConversion.cpp(215): note: consider using '%llX' in the format string
+         Source\Metadata\TagConversion.cpp(215): note: consider using '%I64X' in the format string
+     1>Source\Metadata\TagConversion.cpp(218): warning C4477: 'sprintf' : format string '%X' requires an argument of type 'unsigned int', but variadic argument 1 has type 'UINT64'
+         Source\Metadata\TagConversion.cpp(218): note: consider using '%llX' in the format string
+         Source\Metadata\TagConversion.cpp(218): note: consider using '%I64X' in the format string
+     1>Source\Metadata\TagConversion.cpp(228): warning C4477: 'sprintf' : format string '%ld' requires an argument of type 'long', but variadic argument 1 has type 'INT64'
+         Source\Metadata\TagConversion.cpp(228): note: consider using '%lld' in the format string
+         Source\Metadata\TagConversion.cpp(228): note: consider using '%I64d' in the format string
+     1>Source\Metadata\TagConversion.cpp(231): warning C4477: 'sprintf' : format string '%ld' requires an argument of type 'long', but variadic argument 1 has type 'INT64'
+         Source\Metadata\TagConversion.cpp(231): note: consider using '%lld' in the format string
+         Source\Metadata\TagConversion.cpp(231): note: consider using '%I64d' in the format string
+         TagLib.cpp
+         XTIFF.cpp
+         Background.cpp
+         Compiling...
+         BSplineRotate.cpp
+         Channels.cpp
+         ClassicRotate.cpp
+         Colors.cpp
+         CopyPaste.cpp
+         Display.cpp
+         Flip.cpp
+         JPEGTransform.cpp
+         MultigridPoissonSolver.cpp
+         Rescale.cpp
+         Resize.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ISource /ISource\ZLib /ISource\DeprecationManager /ISource\OpenEXR /ISource\OpenEXR\Half /ISource\OpenEXR\Iex /ISource\OpenEXR\IlmImf /ISource\OpenEXR\Imath /ISource\OpenEXR\IlmThread /ISource\LibJXR\jxrgluelib /ISource\LibJXR\image\sys /nologo /W3 /WX- /O2 /Ob1 /Oi /Ot /Oy /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D OPJ_STATIC /D FREEIMAGE_EXPORTS /D _CRT_SECURE_NO_DEPRECATE /D LIBRAW_NODLL /D _VC80_UPGRADE=0x0710 /D _WINDLL /D _MBCS /GF /Gm- /EHsc /MT /Zp16 /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo".\Win32\Release\\" /Fd".\Win32\Release\vc140.pdb" /Gd /TC /analyze- /errorReport:prompt Source\FreeImage\FreeImageC.c
+         FreeImageC.c
+       ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D NDEBUG /D _VC80_UPGRADE=0x0710 /l"0x0409" /nologo /fo".\Win32\Release\FreeImage.res" FreeImage.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Win32\Release\FreeImage.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST:NO /PDB:".\Win32\Release\FreeImage.pdb" /OPT:REF /LTCG /IGNOREIDL /TLBID:1 /DYNAMICBASE:NO /IMPLIB:".\Win32\Release\FreeImage.lib" /MACHINE:X86 /PROFILE /SAFESEH:NO /DLL .\Win32\Release\FreeImage.res
+         .\Win32\Release\BitmapAccess.obj
+         .\Win32\Release\ColorLookup.obj
+         .\Win32\Release\ConversionRGBA16.obj
+         .\Win32\Release\ConversionRGBAF.obj
+         .\Win32\Release\FreeImage.obj
+         .\Win32\Release\FreeImageC.obj
+         .\Win32\Release\FreeImageIO.obj
+         .\Win32\Release\GetType.obj
+         .\Win32\Release\LFPQuantizer.obj
+         .\Win32\Release\MemoryIO.obj
+         .\Win32\Release\PixelAccess.obj
+         .\Win32\Release\J2KHelper.obj
+         .\Win32\Release\MNGHelper.obj
+         .\Win32\Release\Plugin.obj
+         .\Win32\Release\PluginBMP.obj
+         .\Win32\Release\PluginCUT.obj
+         .\Win32\Release\PluginDDS.obj
+         .\Win32\Release\PluginEXR.obj
+         .\Win32\Release\PluginG3.obj
+         .\Win32\Release\PluginGIF.obj
+         .\Win32\Release\PluginHDR.obj
+         .\Win32\Release\PluginICO.obj
+         .\Win32\Release\PluginIFF.obj
+         .\Win32\Release\PluginJ2K.obj
+         .\Win32\Release\PluginJNG.obj
+         .\Win32\Release\PluginJP2.obj
+         .\Win32\Release\PluginJPEG.obj
+         .\Win32\Release\PluginJXR.obj
+         .\Win32\Release\PluginKOALA.obj
+         .\Win32\Release\PluginMNG.obj
+         .\Win32\Release\PluginPCD.obj
+         .\Win32\Release\PluginPCX.obj
+         .\Win32\Release\PluginPFM.obj
+         .\Win32\Release\PluginPICT.obj
+         .\Win32\Release\PluginPNG.obj
+         .\Win32\Release\PluginPNM.obj
+         .\Win32\Release\PluginPSD.obj
+         .\Win32\Release\PluginRAS.obj
+         .\Win32\Release\PluginRAW.obj
+         .\Win32\Release\PluginSGI.obj
+         .\Win32\Release\PluginTARGA.obj
+         .\Win32\Release\PluginTIFF.obj
+         .\Win32\Release\PluginWBMP.obj
+         .\Win32\Release\PluginWebP.obj
+         .\Win32\Release\PluginXBM.obj
+         .\Win32\Release\PluginXPM.obj
+         .\Win32\Release\PSDParser.obj
+         .\Win32\Release\TIFFLogLuv.obj
+         .\Win32\Release\Conversion.obj
+         .\Win32\Release\Conversion16_555.obj
+         .\Win32\Release\Conversion16_565.obj
+         .\Win32\Release\Conversion24.obj
+         .\Win32\Release\Conversion32.obj
+         .\Win32\Release\Conversion4.obj
+         .\Win32\Release\Conversion8.obj
+         .\Win32\Release\ConversionFloat.obj
+         .\Win32\Release\ConversionRGB16.obj
+         .\Win32\Release\ConversionRGBF.obj
+         .\Win32\Release\ConversionType.obj
+         .\Win32\Release\ConversionUINT16.obj
+         .\Win32\Release\Halftoning.obj
+         .\Win32\Release\tmoColorConvert.obj
+         .\Win32\Release\tmoDrago03.obj
+         .\Win32\Release\tmoFattal02.obj
+         .\Win32\Release\tmoReinhard05.obj
+         .\Win32\Release\ToneMapping.obj
+         .\Win32\Release\NNQuantizer.obj
+         .\Win32\Release\WuQuantizer.obj
+         .\Win32\Release\Deprecated.obj
+         .\Win32\Release\DeprecationMgr.obj
+         .\Win32\Release\CacheFile.obj
+         .\Win32\Release\MultiPage.obj
+         .\Win32\Release\ZLibInterface.obj
+         .\Win32\Release\Exif.obj
+         .\Win32\Release\FIRational.obj
+         .\Win32\Release\FreeImageTag.obj
+         .\Win32\Release\IPTC.obj
+         .\Win32\Release\TagConversion.obj
+         .\Win32\Release\TagLib.obj
+         .\Win32\Release\XTIFF.obj
+         .\Win32\Release\Background.obj
+         .\Win32\Release\BSplineRotate.obj
+         .\Win32\Release\Channels.obj
+         .\Win32\Release\ClassicRotate.obj
+         .\Win32\Release\Colors.obj
+         .\Win32\Release\CopyPaste.obj
+         .\Win32\Release\Display.obj
+         .\Win32\Release\Flip.obj
+         .\Win32\Release\JPEGTransform.obj
+         .\Win32\Release\MultigridPoissonSolver.obj
+         .\Win32\Release\Rescale.obj
+         .\Win32\Release\Resize.obj
+         D:\include\FreeImage_src\Source\LibJPEG\Win32\Release\LibJPEG.lib
+         D:\include\FreeImage_src\Source\LibJXR\Win32\Release\LibJXR.lib
+         D:\include\FreeImage_src\Source\LibOpenJPEG\Win32\Release\LibOpenJPEG.lib
+         D:\include\FreeImage_src\Source\ZLib\Win32\Release\ZLib.lib
+         D:\include\FreeImage_src\Source\LibPNG\Win32\Release\LibPNG.lib
+         D:\include\FreeImage_src\Source\LibRawLite\Win32\Release\LibRaw.lib
+         D:\include\FreeImage_src\Source\LibTIFF4\Win32\Release\LibTIFF4.lib
+         D:\include\FreeImage_src\Source\LibWebP\Win32\Release\LibWebP.lib
+         D:\include\FreeImage_src\Source\OpenEXR\Win32\Release\OpenEXR.lib
+            Creating library .\Win32\Release\FreeImage.lib and object .\Win32\Release\FreeImage.exp
+         Generating code
+         Finished generating code
+         FreeImage.2013.vcxproj -> D:\include\FreeImage_src\.\Win32\Release\FreeImage.dll
+       PostBuildEvent:
+         mkdir Dist\x32
+         copy .\Win32\Release\FreeImage.dll Dist\x32
+         copy .\Win32\Release\FreeImage.lib Dist\x32
+         copy Source\FreeImage.h Dist\x32
+         
+         :VCEnd
+         Подпапка или файл Dist\x32 уже существует.
+         Скопировано файлов:         1.
+         Скопировано файлов:         1.
+         Скопировано файлов:         1.
+     1>Done Building Project "D:\include\FreeImage_src\FreeImage.2013.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:49.15

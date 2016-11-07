@@ -4319,7 +4319,7 @@ void LibRaw::parse_x3f()
 		  if(fnd)
 		  {
 			  unsigned char *nm = fnd+8;
-			  snprintf(imgdata.idata.model,64,"dp%c Quattro",*nm<='9' && *nm >='0' ? *nm: '2');
+			  _snprintf_s(imgdata.idata.model,64,"dp%c Quattro",*nm<='9' && *nm >='0' ? *nm: '2');
 		  }
 		  else
 #endif

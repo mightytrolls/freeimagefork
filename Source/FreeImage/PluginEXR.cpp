@@ -182,20 +182,28 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 
 	try {
 		BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
-
+		
 		// save the stream starting point
 		const long stream_start = io->tell_proc(handle);
-
+		
 		// wrap the FreeImage IO stream
 		C_IStream istream(io, handle);
-
+		
 		// open the file
 		Imf::InputFile file(istream);
-
+		
 		// get file info			
-		const Imath::Box2i &dataWindow = file.header().dataWindow();
-		int width  = dataWindow.max.x - dataWindow.min.x + 1;
-		int height = dataWindow.max.y - dataWindow.min.y + 1;
+		Imath::Box2i dataWindowtmp = file.header().dataWindow();							//CHANGE!! const Imath::Box2i &dataWindow = file.header().dataWindow();
+		const Imath::Box2i &displayWindow = file.header().displayWindow();						//CHANGE!!
+		int width  = displayWindow.max.x - displayWindow.min.x + 1;
+		int height = displayWindow.max.y - displayWindow.min.y + 1;
+		//CHANGE add
+		if (dataWindowtmp.min.x < 0)dataWindowtmp.min.x = 0;
+		if (dataWindowtmp.min.y < 0)dataWindowtmp.min.y = 0;
+		if (dataWindowtmp.max.x >= width)dataWindowtmp.max.x = width - 1;
+		if (dataWindowtmp.max.y >= height)dataWindowtmp.max.y = height - 1;
+		const Imath::Box2i &dataWindow = dataWindowtmp;
+		//end CHANGE
 
 		//const Imf::Compression &compression = file.header().compression();
 
@@ -368,10 +376,11 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 
 			// read the file in chunks
 			Imath::Box2i dw = dataWindow;
+			Imath::Box2i dispw = displayWindow;											//CHANGE : UNTESTED! MAY BE NOT WORKING PROPERLY!
 			Imf::Array2D<Imf::Rgba> chunk(chunk_size, width);
 			while (dw.min.y <= dw.max.y) {
 				// read a chunk
-				rgbaFile.setFrameBuffer (&chunk[0][0] - dw.min.x - dw.min.y * width, 1, width);
+				rgbaFile.setFrameBuffer (&chunk[0][0] - dispw.min.x - dispw.min.y * width, 1, width);
 				rgbaFile.readPixels (dw.min.y, MIN(dw.min.y + chunk_size - 1, dw.max.y));
 				// fill the dib
 				const int y_max = ((dw.max.y - dw.min.y) <= chunk_size) ? (dw.max.y - dw.min.y) : chunk_size;
@@ -389,6 +398,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 				}
 				// next chunk
 				dw.min.y += chunk_size;
+				dispw.min.y += chunk_size;
 			}
 
 		} else {
@@ -398,7 +408,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 			Imf::FrameBuffer frameBuffer;
 
 			// allow dataWindow with minimal bounds different form zero
-			size_t offset = - dataWindow.min.x * bytespp - dataWindow.min.y * pitch;
+			size_t offset = 0;// -dataWindow.min.x * bytespp - dataWindow.min.y * pitch;				//CHANGE: because we load whole image, not just data block
 
 			if(components == 1) {
 				frameBuffer.insert ("Y",	// name

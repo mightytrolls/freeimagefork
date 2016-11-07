@@ -1,0 +1,50 @@
+﻿Build started 06.12.2015 23:11:25.
+     1>Project "D:\include\FreeImage_src\Source\LibOpenJPEG\LibOpenJPEG.2013.vcxproj" on node 5 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /Od /D WIN32 /D _DEBUG /D _LIB /D OPJ_STATIC /D _CRT_SECURE_NO_DEPRECATE /D _VC80_UPGRADE=0x0710 /D _MBCS /GF /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo".\x64\Debug\\" /Fd".\x64\Debug\LibOpenJPEG.pdb" /Gd /TC /errorReport:prompt bio.c cio.c dwt.c event.c function_list.c image.c invert.c j2k.c jp2.c mct.c mqc.c openjpeg.c opj_clock.c pi.c raw.c t1.c t2.c tcd.c tgt.c
+         bio.c
+         cio.c
+         dwt.c
+         event.c
+         function_list.c
+         image.c
+         invert.c
+         j2k.c
+         jp2.c
+         mct.c
+         mqc.c
+         openjpeg.c
+         opj_clock.c
+         pi.c
+         raw.c
+         t1.c
+         t2.c
+         tcd.c
+         tgt.c
+         Generating Code...
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\Lib.exe /OUT:".\x64\Debug\LibOpenJPEG.lib" /NOLOGO /MACHINE:X64 .\x64\Debug\bio.obj
+         .\x64\Debug\cio.obj
+         .\x64\Debug\dwt.obj
+         .\x64\Debug\event.obj
+         .\x64\Debug\function_list.obj
+         .\x64\Debug\image.obj
+         .\x64\Debug\invert.obj
+         .\x64\Debug\j2k.obj
+         .\x64\Debug\jp2.obj
+         .\x64\Debug\mct.obj
+         .\x64\Debug\mqc.obj
+         .\x64\Debug\openjpeg.obj
+         .\x64\Debug\opj_clock.obj
+         .\x64\Debug\pi.obj
+         .\x64\Debug\raw.obj
+         .\x64\Debug\t1.obj
+         .\x64\Debug\t2.obj
+         .\x64\Debug\tcd.obj
+         .\x64\Debug\tgt.obj
+         LibOpenJPEG.2013.vcxproj -> D:\include\FreeImage_src\Source\LibOpenJPEG\.\x64\Debug\LibOpenJPEG.lib
+     1>Done Building Project "D:\include\FreeImage_src\Source\LibOpenJPEG\LibOpenJPEG.2013.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.00

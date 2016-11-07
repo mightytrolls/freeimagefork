@@ -1,0 +1,115 @@
+﻿Build started 20.03.2016 15:53:47.
+     1>Project "C:\usr\code\FreeImage_src_vs13\Source\LibJPEG\LibJPEG.2013.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I..\zlib /nologo /W3 /WX- /Ox /Ob1 /Oi /Ot /Oy /D WIN32 /D NDEBUG /D _LIB /D _CRT_SECURE_NO_DEPRECATE /D _VC80_UPGRADE=0x0710 /D _MBCS /GF /Gm- /EHsc /MT /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\x64\Release\\" /Fd".\x64\Release\vc120.pdb" /Gd /TC /errorReport:prompt jaricom.c jcapimin.c jcapistd.c jcarith.c jccoefct.c jccolor.c jcdctmgr.c jchuff.c jcinit.c jcmainct.c jcmarker.c jcmaster.c jcomapi.c jcparam.c jcprepct.c jcsample.c jctrans.c jdapimin.c jdapistd.c jdarith.c jdatadst.c jdatasrc.c jdcoefct.c jdcolor.c jddctmgr.c jdhuff.c jdinput.c jdmainct.c jdmarker.c jdmaster.c jdmerge.c jdpostct.c jdsample.c jdtrans.c jerror.c jfdctflt.c jfdctfst.c jfdctint.c jidctflt.c jidctfst.c jidctint.c jmemmgr.c jmemnobs.c jquant1.c jquant2.c jutils.c transupp.c
+         jaricom.c
+         jcapimin.c
+         jcapistd.c
+         jcarith.c
+         jccoefct.c
+         jccolor.c
+         jcdctmgr.c
+         jchuff.c
+         jcinit.c
+         jcmainct.c
+         jcmarker.c
+         jcmaster.c
+         jcomapi.c
+         jcparam.c
+         jcprepct.c
+         jcsample.c
+         jctrans.c
+         jdapimin.c
+         jdapistd.c
+         jdarith.c
+         Generating Code...
+         Compiling...
+         jdatadst.c
+     1>jdatadst.c(185): warning C4267: '=' : conversion from 'size_t' to 'unsigned long', possible loss of data
+         jdatasrc.c
+         jdcoefct.c
+         jdcolor.c
+         jddctmgr.c
+         jdhuff.c
+         jdinput.c
+         jdmainct.c
+         jdmarker.c
+         jdmaster.c
+         jdmerge.c
+         jdpostct.c
+         jdsample.c
+         jdtrans.c
+         jerror.c
+         jfdctflt.c
+         jfdctfst.c
+         jfdctint.c
+         jidctflt.c
+         jidctfst.c
+         Generating Code...
+         Compiling...
+         jidctint.c
+         jmemmgr.c
+     1>jmemmgr.c(307): warning C4267: '+=' : conversion from 'size_t' to 'long', possible loss of data
+     1>jmemmgr.c(367): warning C4267: '+=' : conversion from 'size_t' to 'long', possible loss of data
+     1>jmemmgr.c(977): warning C4267: '-=' : conversion from 'size_t' to 'long', possible loss of data
+     1>jmemmgr.c(991): warning C4267: '-=' : conversion from 'size_t' to 'long', possible loss of data
+         jmemnobs.c
+         jquant1.c
+         jquant2.c
+         jutils.c
+         transupp.c
+         Generating Code...
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\Lib.exe /OUT:".\x64\Release\LibJPEG.lib" /NOLOGO /MACHINE:X64 /LTCG .\x64\Release\jaricom.obj
+         .\x64\Release\jcapimin.obj
+         .\x64\Release\jcapistd.obj
+         .\x64\Release\jcarith.obj
+         .\x64\Release\jccoefct.obj
+         .\x64\Release\jccolor.obj
+         .\x64\Release\jcdctmgr.obj
+         .\x64\Release\jchuff.obj
+         .\x64\Release\jcinit.obj
+         .\x64\Release\jcmainct.obj
+         .\x64\Release\jcmarker.obj
+         .\x64\Release\jcmaster.obj
+         .\x64\Release\jcomapi.obj
+         .\x64\Release\jcparam.obj
+         .\x64\Release\jcprepct.obj
+         .\x64\Release\jcsample.obj
+         .\x64\Release\jctrans.obj
+         .\x64\Release\jdapimin.obj
+         .\x64\Release\jdapistd.obj
+         .\x64\Release\jdarith.obj
+         .\x64\Release\jdatadst.obj
+         .\x64\Release\jdatasrc.obj
+         .\x64\Release\jdcoefct.obj
+         .\x64\Release\jdcolor.obj
+         .\x64\Release\jddctmgr.obj
+         .\x64\Release\jdhuff.obj
+         .\x64\Release\jdinput.obj
+         .\x64\Release\jdmainct.obj
+         .\x64\Release\jdmarker.obj
+         .\x64\Release\jdmaster.obj
+         .\x64\Release\jdmerge.obj
+         .\x64\Release\jdpostct.obj
+         .\x64\Release\jdsample.obj
+         .\x64\Release\jdtrans.obj
+         .\x64\Release\jerror.obj
+         .\x64\Release\jfdctflt.obj
+         .\x64\Release\jfdctfst.obj
+         .\x64\Release\jfdctint.obj
+         .\x64\Release\jidctflt.obj
+         .\x64\Release\jidctfst.obj
+         .\x64\Release\jidctint.obj
+         .\x64\Release\jmemmgr.obj
+         .\x64\Release\jmemnobs.obj
+         .\x64\Release\jquant1.obj
+         .\x64\Release\jquant2.obj
+         .\x64\Release\jutils.obj
+         .\x64\Release\transupp.obj
+         LibJPEG.2013.vcxproj -> C:\usr\code\FreeImage_src_vs13\Source\LibJPEG\.\x64\Release\LibJPEG.lib
+     1>Done Building Project "C:\usr\code\FreeImage_src_vs13\Source\LibJPEG\LibJPEG.2013.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:15.15

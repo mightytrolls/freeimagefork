@@ -1,0 +1,104 @@
+﻿Build started 20.03.2016 15:54:03.
+     1>Project "C:\usr\code\FreeImage_src_vs13\Source\LibTIFF4\LibTIFF4.2013.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /nologo /W3 /WX- /Ox /Ob1 /Oi /Ot /Oy /D WIN32 /D NDEBUG /D _LIB /D _CRT_SECURE_NO_DEPRECATE /D _VC80_UPGRADE=0x0710 /D _MBCS /GF /Gm- /EHsc /MT /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\x64\Release\\" /Fd".\x64\Release\vc120.pdb" /Gd /TC /errorReport:prompt tif_aux.c tif_close.c tif_codec.c tif_color.c tif_compress.c tif_dir.c tif_dirinfo.c tif_dirread.c tif_dirwrite.c tif_dumpmode.c tif_error.c tif_extension.c tif_fax3.c tif_fax3sm.c tif_flush.c tif_getimage.c tif_jpeg.c tif_luv.c tif_lzma.c tif_lzw.c tif_next.c tif_ojpeg.c tif_open.c tif_packbits.c tif_pixarlog.c tif_predict.c tif_print.c tif_read.c tif_strip.c tif_swab.c tif_thunder.c tif_tile.c tif_version.c tif_warning.c tif_write.c tif_zip.c
+         tif_aux.c
+         tif_close.c
+         tif_codec.c
+     1>tif_codec.c(111): warning C4047: 'function' : 'size_t' differs in levels of indirection from 'char [3]'
+     1>tif_codec.c(111): warning C4024: '_snprintf_s' : different types for formal and actual parameter 3
+     1>tif_codec.c(112): warning C4047: 'function' : 'const char *' differs in levels of indirection from 'uint16'
+     1>tif_codec.c(112): warning C4024: '_snprintf_s' : different types for formal and actual parameter 4
+         tif_color.c
+         tif_compress.c
+         tif_dir.c
+         tif_dirinfo.c
+     1>tif_dirinfo.c(716): warning C4047: 'function' : 'size_t' differs in levels of indirection from 'char [7]'
+     1>tif_dirinfo.c(716): warning C4024: '_snprintf_s' : different types for formal and actual parameter 3
+     1>tif_dirinfo.c(716): warning C4047: 'function' : 'const char *' differs in levels of indirection from 'int'
+     1>tif_dirinfo.c(716): warning C4024: '_snprintf_s' : different types for formal and actual parameter 4
+         tif_dirread.c
+         tif_dirwrite.c
+         tif_dumpmode.c
+         tif_error.c
+         tif_extension.c
+         tif_fax3.c
+         tif_fax3sm.c
+         tif_flush.c
+         tif_getimage.c
+         tif_jpeg.c
+     1>tif_jpeg.c(1842): warning C4244: '=' : conversion from 'tmsize_t' to 'int', possible loss of data
+         tif_luv.c
+         tif_lzma.c
+         tif_lzw.c
+         Generating Code...
+         Compiling...
+         tif_next.c
+         tif_ojpeg.c
+     1>tif_ojpeg.c(1777): warning C4244: '=' : conversion from 'tmsize_t' to 'uint32', possible loss of data
+     1>tif_ojpeg.c(1820): warning C4244: '=' : conversion from 'tmsize_t' to 'uint32', possible loss of data
+     1>tif_ojpeg.c(1841): warning C4244: '=' : conversion from 'tmsize_t' to 'uint32', possible loss of data
+     1>tif_ojpeg.c(1884): warning C4244: '=' : conversion from 'tmsize_t' to 'uint32', possible loss of data
+     1>tif_ojpeg.c(1905): warning C4244: '=' : conversion from 'tmsize_t' to 'uint32', possible loss of data
+         tif_open.c
+         tif_packbits.c
+         tif_pixarlog.c
+     1>tif_pixarlog.c(925): warning C4244: '=' : conversion from 'tmsize_t' to 'uInt', possible loss of data
+         tif_predict.c
+         tif_print.c
+     1>tif_print.c(399): warning C4244: 'initializing' : conversion from '__int64' to 'int', possible loss of data
+     1>tif_print.c(678): warning C4267: 'function' : conversion from 'size_t' to 'int', possible loss of data
+         tif_read.c
+         tif_strip.c
+         tif_swab.c
+         tif_thunder.c
+         tif_tile.c
+         tif_version.c
+         tif_warning.c
+         tif_write.c
+         tif_zip.c
+     1>tif_zip.c(243): warning C4244: '=' : conversion from 'tmsize_t' to 'uInt', possible loss of data
+         Generating Code...
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\Lib.exe /OUT:".\x64\Release\LibTIFF4.lib" /NOLOGO /MACHINE:X64 /LTCG .\x64\Release\tif_aux.obj
+         .\x64\Release\tif_close.obj
+         .\x64\Release\tif_codec.obj
+         .\x64\Release\tif_color.obj
+         .\x64\Release\tif_compress.obj
+         .\x64\Release\tif_dir.obj
+         .\x64\Release\tif_dirinfo.obj
+         .\x64\Release\tif_dirread.obj
+         .\x64\Release\tif_dirwrite.obj
+         .\x64\Release\tif_dumpmode.obj
+         .\x64\Release\tif_error.obj
+         .\x64\Release\tif_extension.obj
+         .\x64\Release\tif_fax3.obj
+         .\x64\Release\tif_fax3sm.obj
+         .\x64\Release\tif_flush.obj
+         .\x64\Release\tif_getimage.obj
+         .\x64\Release\tif_jpeg.obj
+         .\x64\Release\tif_luv.obj
+         .\x64\Release\tif_lzma.obj
+         .\x64\Release\tif_lzw.obj
+         .\x64\Release\tif_next.obj
+         .\x64\Release\tif_ojpeg.obj
+         .\x64\Release\tif_open.obj
+         .\x64\Release\tif_packbits.obj
+         .\x64\Release\tif_pixarlog.obj
+         .\x64\Release\tif_predict.obj
+         .\x64\Release\tif_print.obj
+         .\x64\Release\tif_read.obj
+         .\x64\Release\tif_strip.obj
+         .\x64\Release\tif_swab.obj
+         .\x64\Release\tif_thunder.obj
+         .\x64\Release\tif_tile.obj
+         .\x64\Release\tif_version.obj
+         .\x64\Release\tif_warning.obj
+         .\x64\Release\tif_write.obj
+         .\x64\Release\tif_zip.obj
+         LibTIFF4.2013.vcxproj -> C:\usr\code\FreeImage_src_vs13\Source\LibTIFF4\.\x64\Release\LibTIFF4.lib
+     1>Done Building Project "C:\usr\code\FreeImage_src_vs13\Source\LibTIFF4\LibTIFF4.2013.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:06.77

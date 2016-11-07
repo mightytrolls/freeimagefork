@@ -284,7 +284,7 @@ reconstructLineOffsets (OPENEXR_IMF_INTERNAL_NAMESPACE::IStream &is,
 			vector<Int64> &lineOffsets)
 {
     Int64 position = is.tellg();
-
+	
     try
     {
 	for (unsigned int i = 0; i < lineOffsets.size(); i++)
@@ -293,12 +293,12 @@ reconstructLineOffsets (OPENEXR_IMF_INTERNAL_NAMESPACE::IStream &is,
 
 	    int y;
 	    OPENEXR_IMF_INTERNAL_NAMESPACE::Xdr::read <OPENEXR_IMF_INTERNAL_NAMESPACE::StreamIO> (is, y);
-
+		
 	    int dataSize;
 	    OPENEXR_IMF_INTERNAL_NAMESPACE::Xdr::read <OPENEXR_IMF_INTERNAL_NAMESPACE::StreamIO> (is, dataSize);
-
+		
 	    Xdr::skip <StreamIO> (is, dataSize);
-
+		
 	    if (lineOrder == INCREASING_Y)
 		lineOffsets[i] = lineOffset;
 	    else
@@ -307,6 +307,7 @@ reconstructLineOffsets (OPENEXR_IMF_INTERNAL_NAMESPACE::IStream &is,
     }
     catch (...)
     {
+		
 	//
 	// Suppress all exceptions.  This functions is
 	// called only to reconstruct the line offset
@@ -351,7 +352,7 @@ readLineOffsets (OPENEXR_IMF_INTERNAL_NAMESPACE::IStream &is,
 	    //
 
 	    complete = false;
-	    reconstructLineOffsets (is, lineOrder, lineOffsets);
+	    //reconstructLineOffsets (is, lineOrder, lineOffsets);
 	    break;
 	}
     }
@@ -1188,7 +1189,7 @@ ScanLineInputFile::ScanLineInputFile
     _data->memoryMapped = is->isMemoryMapped();
 
     initialize(header);
-    
+
     //
     // (TODO) this is nasty - we need a better way of working out what type of file has been used.
     // in any case I believe this constructor only gets used with single part files

@@ -1,0 +1,52 @@
+﻿Build started 20.03.2016 15:53:47.
+     1>Project "C:\usr\code\FreeImage_src_vs13\Source\LibOpenJPEG\LibOpenJPEG.2013.vcxproj" on node 4 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /nologo /W3 /WX- /O2 /Ob1 /Oi /Ot /Oy /D WIN32 /D NDEBUG /D _LIB /D OPJ_STATIC /D _CRT_SECURE_NO_DEPRECATE /D _VC80_UPGRADE=0x0710 /D _MBCS /GF /Gm- /EHsc /MT /GS- /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\x64\Release\\" /Fd".\x64\Release\vc120.pdb" /Gd /TC /errorReport:prompt bio.c cio.c dwt.c event.c image.c j2k.c jp2.c mct.c mqc.c openjpeg.c pi.c raw.c t1.c t2.c tcd.c tgt.c
+         bio.c
+         cio.c
+         dwt.c
+         event.c
+         image.c
+         j2k.c
+         jp2.c
+         mct.c
+         mqc.c
+         openjpeg.c
+         pi.c
+         raw.c
+         t1.c
+         t2.c
+         tcd.c
+         tgt.c
+         Generating Code...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /nologo /W3 /WX- /Ox /Ob1 /Oi /Ot /Oy /D WIN32 /D NDEBUG /D _LIB /D OPJ_STATIC /D _CRT_SECURE_NO_DEPRECATE /D _VC80_UPGRADE=0x0710 /D _MBCS /GF /Gm- /EHsc /MT /GS- /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\x64\Release\\" /Fd".\x64\Release\vc120.pdb" /Gd /TC /errorReport:prompt function_list.c invert.c opj_clock.c
+         function_list.c
+         invert.c
+         opj_clock.c
+         Generating Code...
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\Lib.exe /OUT:".\x64\Release\LibOpenJPEG.lib" /NOLOGO /MACHINE:X64 /LTCG .\x64\Release\bio.obj
+         .\x64\Release\cio.obj
+         .\x64\Release\dwt.obj
+         .\x64\Release\event.obj
+         .\x64\Release\function_list.obj
+         .\x64\Release\image.obj
+         .\x64\Release\invert.obj
+         .\x64\Release\j2k.obj
+         .\x64\Release\jp2.obj
+         .\x64\Release\mct.obj
+         .\x64\Release\mqc.obj
+         .\x64\Release\openjpeg.obj
+         .\x64\Release\opj_clock.obj
+         .\x64\Release\pi.obj
+         .\x64\Release\raw.obj
+         .\x64\Release\t1.obj
+         .\x64\Release\t2.obj
+         .\x64\Release\tcd.obj
+         .\x64\Release\tgt.obj
+         LibOpenJPEG.2013.vcxproj -> C:\usr\code\FreeImage_src_vs13\Source\LibOpenJPEG\.\x64\Release\LibOpenJPEG.lib
+     1>Done Building Project "C:\usr\code\FreeImage_src_vs13\Source\LibOpenJPEG\LibOpenJPEG.2013.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:06.40

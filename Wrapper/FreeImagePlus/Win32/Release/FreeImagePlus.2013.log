@@ -1,0 +1,43 @@
+﻿Build started 26.07.2015 12:12:54.
+     1>Project "D:\include\FreeImage_src\Wrapper\FreeImagePlus\FreeImagePlus.2013.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I. /I../../Source /nologo /W3 /WX- /O2 /Ob1 /Oi /Ot /Oy /GL /D NDEBUG /D WIN32 /D _WINDOWS /D _USRDLL /D FIP_EXPORTS /D _CRT_SECURE_NO_DEPRECATE /D _VC80_UPGRADE=0x0710 /D _WINDLL /D _MBCS /GF /Gm- /EHsc /MT /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo".\Win32\Release\\" /Fd".\Win32\Release\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt src\fipImage.cpp src\fipMemoryIO.cpp src\fipMetadataFind.cpp src\fipMultiPage.cpp src\fipTag.cpp src\fipWinImage.cpp src\FreeImagePlus.cpp
+         fipImage.cpp
+         fipMemoryIO.cpp
+         fipMetadataFind.cpp
+         fipMultiPage.cpp
+         fipTag.cpp
+         fipWinImage.cpp
+         FreeImagePlus.cpp
+       ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D NDEBUG /D _VC80_UPGRADE=0x0710 /l"0x040c" /nologo /fo".\Win32\Release\FreeImagePlus.res" FreeImagePlus.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Win32\Release\FreeImagePlus.dll" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST:NO /DEBUG /PDB:".\Win32\Release\FreeImagePlus.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE:NO /IMPLIB:".\Win32\Release\FreeImagePlus.lib" /MACHINE:X86 /SAFESEH /DLL .\Win32\Release\FreeImagePlus.res
+         .\Win32\Release\fipImage.obj
+         .\Win32\Release\fipMemoryIO.obj
+         .\Win32\Release\fipMetadataFind.obj
+         .\Win32\Release\fipMultiPage.obj
+         .\Win32\Release\fipTag.obj
+         .\Win32\Release\fipWinImage.obj
+         .\Win32\Release\FreeImagePlus.obj
+         D:\include\FreeImage_src\Win32\Release\FreeImage.lib
+            Creating library .\Win32\Release\FreeImagePlus.lib and object .\Win32\Release\FreeImagePlus.exp
+         Generating code
+         Finished generating code
+         FreeImagePlus.2013.vcxproj -> D:\include\FreeImage_src\Wrapper\FreeImagePlus\.\Win32\Release\FreeImagePlus.dll
+       PostBuildEvent:
+         mkdir dist\x32
+         copy .\Win32\Release\FreeImagePlus.dll dist\x32
+         copy .\Win32\Release\FreeImagePlus.lib dist\x32
+         copy FreeImagePlus.h dist\x32
+         
+         :VCEnd
+         Подпапка или файл dist\x32 уже существует.
+         Скопировано файлов:         1.
+         Скопировано файлов:         1.
+         Скопировано файлов:         1.
+     1>Done Building Project "D:\include\FreeImage_src\Wrapper\FreeImagePlus\FreeImagePlus.2013.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.06

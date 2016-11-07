@@ -1,0 +1,55 @@
+﻿Build started 20.03.2016 15:53:47.
+     1>Project "C:\usr\code\FreeImage_src_vs13\Source\ZLib\ZLib.2013.vcxproj" on node 3 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /nologo /W3 /WX- /Ox /Ob1 /Oi /Ot /Oy /D WIN32 /D NDEBUG /D _LIB /D _CRT_SECURE_NO_DEPRECATE /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS /D _VC80_UPGRADE=0x0710 /D _MBCS /GF /Gm- /EHsc /MT /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\x64\Release\\" /Fd".\x64\Release\vc120.pdb" /Gd /TC /errorReport:prompt adler32.c compress.c crc32.c deflate.c gzclose.c gzlib.c gzread.c gzwrite.c infback.c inffast.c inflate.c inftrees.c trees.c uncompr.c zutil.c
+         adler32.c
+         compress.c
+         crc32.c
+         deflate.c
+         gzclose.c
+         gzlib.c
+     1>gzlib.c(214): warning C4013: 'snprintf' undefined; assuming extern returning int
+     1>gzlib.c(245): warning C4996: 'open': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _open. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\io.h(336) : see declaration of 'open'
+         gzread.c
+     1>gzread.c(30): warning C4996: 'read': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _read. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\io.h(337) : see declaration of 'read'
+     1>gzread.c(591): warning C4996: 'close': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _close. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\io.h(326) : see declaration of 'close'
+         gzwrite.c
+     1>gzwrite.c(84): warning C4996: 'write': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _write. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\io.h(342) : see declaration of 'write'
+     1>gzwrite.c(102): warning C4996: 'write': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _write. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\io.h(342) : see declaration of 'write'
+     1>gzwrite.c(573): warning C4996: 'close': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _close. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\io.h(326) : see declaration of 'close'
+         infback.c
+         inffast.c
+         inflate.c
+         inftrees.c
+         trees.c
+         uncompr.c
+         zutil.c
+         Generating Code...
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\Lib.exe /OUT:".\x64\Release\ZLib.lib" /NOLOGO /MACHINE:X64 /LTCG .\x64\Release\adler32.obj
+         .\x64\Release\compress.obj
+         .\x64\Release\crc32.obj
+         .\x64\Release\deflate.obj
+         .\x64\Release\gzclose.obj
+         .\x64\Release\gzlib.obj
+         .\x64\Release\gzread.obj
+         .\x64\Release\gzwrite.obj
+         .\x64\Release\infback.obj
+         .\x64\Release\inffast.obj
+         .\x64\Release\inflate.obj
+         .\x64\Release\inftrees.obj
+         .\x64\Release\trees.obj
+         .\x64\Release\uncompr.obj
+         .\x64\Release\zutil.obj
+         ZLib.2013.vcxproj -> C:\usr\code\FreeImage_src_vs13\Source\ZLib\.\x64\Release\ZLib.lib
+     1>Done Building Project "C:\usr\code\FreeImage_src_vs13\Source\ZLib\ZLib.2013.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.23
