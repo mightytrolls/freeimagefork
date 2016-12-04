@@ -175,6 +175,7 @@ static FIBITMAP * DLL_CALLCONV
 Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 	bool bUseRgbaInterface = false;
 	FIBITMAP *dib = NULL;	
+	FIBITMAP *tempdib = NULL;
 
 	if(!handle) {
 		return NULL;
@@ -192,16 +193,24 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 		// open the file
 		Imf::InputFile file(istream);
 		
-		// get file info			
+		// get file info
 		Imath::Box2i dataWindowtmp = file.header().dataWindow();							//CHANGE!! const Imath::Box2i &dataWindow = file.header().dataWindow();
 		const Imath::Box2i &displayWindow = file.header().displayWindow();						//CHANGE!!
 		int width  = displayWindow.max.x - displayWindow.min.x + 1;
 		int height = displayWindow.max.y - displayWindow.min.y + 1;
 		//CHANGE add
-		if (dataWindowtmp.min.x < 0)dataWindowtmp.min.x = 0;
-		if (dataWindowtmp.min.y < 0)dataWindowtmp.min.y = 0;
-		if (dataWindowtmp.max.x >= width)dataWindowtmp.max.x = width - 1;
-		if (dataWindowtmp.max.y >= height)dataWindowtmp.max.y = height - 1;
+		//std::cout << "FIDEBUG: " << dataWindowtmp.min.x << " " << dataWindowtmp.min.y << " " << dataWindowtmp.max.x << " " << dataWindowtmp.max.y << std::endl;
+		//THROW(Iex::InputExc, "FIDEBUG: " << dataWindowtmp.min.x <<" "<< dataWindowtmp.min.y<<" "<< dataWindowtmp.max.x<<" "<< dataWindowtmp.max.y);
+		//const int datawidth = dataWindowtmp.max.x - dataWindowtmp.min.x + 1;
+		//const int dataheight = dataWindowtmp.max.y - dataWindowtmp.min.y + 1;
+		const int fulltempwidth = MAX(dataWindowtmp.max.x, displayWindow.max.x) - MIN(dataWindowtmp.min.x, displayWindow.min.x) + 1;
+		const int fulltempheight = MAX(dataWindowtmp.max.y, displayWindow.max.y) - MIN(dataWindowtmp.min.y, displayWindow.min.y) + 1;
+		const bool biggerData = (fulltempwidth > width || fulltempheight > height);
+		//std::cout << "FIDEBUG: " << fulltempwidth << "<>" << width << " " << fulltempheight << "<>" << height << std::endl;
+		//if (dataWindowtmp.min.x < 0)dataWindowtmp.min.x = 0;
+		//if (dataWindowtmp.min.y < 0)dataWindowtmp.min.y = 0;
+		//if (dataWindowtmp.max.x >= width)dataWindowtmp.max.x = width - 1;
+		//if (dataWindowtmp.max.y >= height)dataWindowtmp.max.y = height - 1;
 		const Imath::Box2i &dataWindow = dataWindowtmp;
 		//end CHANGE
 
@@ -312,8 +321,19 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 		}
 
 		// allocate a new dib
-		dib = FreeImage_AllocateHeaderT(header_only, image_type, width, height, 0);
-		if(!dib) THROW (Iex::NullExc, FI_MSG_ERROR_MEMORY);
+		
+		
+		if (!header_only && biggerData){
+			tempdib = FreeImage_AllocateHeaderT(FALSE, image_type, fulltempwidth, fulltempheight, 0);
+			if (!tempdib){
+				THROW(Iex::NullExc, FI_MSG_ERROR_MEMORY);
+			}
+		}
+		else{
+			dib = FreeImage_AllocateHeaderT(header_only, image_type, width, height, 0);
+			if (!dib) THROW(Iex::NullExc, FI_MSG_ERROR_MEMORY);
+		}
+		
 
 		// try to load the preview image
 		// --------------------------------------------------------------
@@ -344,7 +364,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 					src_line += thWidth;
 					dst_line -= dstPitch;
 				}
-				FreeImage_SetThumbnail(dib, thumbnail);
+				FreeImage_SetThumbnail(dib, thumbnail);//#TODO: fix, now here cat be NULL
 				FreeImage_Unload(thumbnail);
 			}
 		}
@@ -357,13 +377,19 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 		// load pixels
 		// --------------------------------------------------------------
 
-		const BYTE *bits = FreeImage_GetBits(dib);			// pointer to our pixel buffer
+		const BYTE *bits = FreeImage_GetBits(biggerData ? tempdib : dib);			// pointer to our pixel buffer
 		const size_t bytespp = sizeof(float) * components;	// size of our pixel in bytes
-		const unsigned pitch = FreeImage_GetPitch(dib);		// size of our yStride in bytes
+		const unsigned pitch = FreeImage_GetPitch(biggerData ? tempdib : dib);		// size of our yStride in bytes
+		//const
 
 		Imf::PixelType pixelType = Imf::FLOAT;	// load as float data type;
 		
+		//std::cout << "FIDEBUG: " << (biggerData?"big":"small") << std::endl;
+		//std::cout << "FIDEBUG: " << (bUseRgbaInterface? "rgba" : "lowlevel") << std::endl;
+		//std::cout << "FIDEBUG: " << (size_t)bits << " " << bytespp << " " << pitch << std::endl;
 		if(bUseRgbaInterface) {
+			if (biggerData)THROW(Iex::BaseExc, "RY BY Y exr loading interface is not fixed to properly treat negative data windows!");
+
 			// use the RGBA interface (used when loading RY BY Y images )
 
 			const int chunk_size = 16;
@@ -409,6 +435,11 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 
 			// allow dataWindow with minimal bounds different form zero
 			size_t offset = 0;// -dataWindow.min.x * bytespp - dataWindow.min.y * pitch;				//CHANGE: because we load whole image, not just data block
+			if (biggerData){
+				const int left = MAX(displayWindow.min.x - dataWindowtmp.min.x, 0);
+				const int top = MAX(displayWindow.min.y - dataWindowtmp.min.y, 0);
+				offset = left*bytespp + top*pitch;
+			}
 
 			if(components == 1) {
 				frameBuffer.insert ("Y",	// name
@@ -435,15 +466,30 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 
 			// read the file
 			file.setFrameBuffer(frameBuffer);
+			//std::cout << " line reading begin" << std::endl;
 			file.readPixels(dataWindow.min.y, dataWindow.max.y);
+			//std::cout << " line reading end" << std::endl;
 		}
-
+		//std::cout << "FIDEBUG: " << "BARK WOOF" << std::endl;
+		if (biggerData){
+			//MAX(dataWindowtmp.max.x, displayWindow.max.x) - MIN(dataWindowtmp.min.x, displayWindow.min.x) + 1;
+			//const int fulltempheight = MAX(dataWindowtmp.max.y, displayWindow.max.y) - MIN(dataWindowtmp.min.y, displayWindow.min.y) + 1;
+			const int left = MAX(displayWindow.min.x - dataWindowtmp.min.x, 0);
+			const int bottom = fulltempheight - MAX(displayWindow.min.y - dataWindowtmp.min.y, 0);
+			const int right = left + width;
+			const int top = bottom - height;
+			dib = FreeImage_Copy(tempdib, left, top, right, bottom);
+			FreeImage_Unload(tempdib);
+		}
 		// lastly, flip dib lines
 		FreeImage_FlipVertical(dib);
 
 	}
 	catch(Iex::BaseExc & e) {
 		if(dib != NULL) {
+			FreeImage_Unload(dib);
+		}
+		if (tempdib != NULL){
 			FreeImage_Unload(dib);
 		}
 		FreeImage_OutputMessageProc(s_format_id, e.what());

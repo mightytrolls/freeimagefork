@@ -1,0 +1,8 @@
+**.*sdf
+**.obj
+**.*log
+.vs
+**.pdb
+**.idb
+**.lastbuildstate
+**.exp
